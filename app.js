@@ -18,13 +18,18 @@ mongoose.connect(process.env.MONGODB_URI).then(
          );
 
 const user = require("./roots/user.root");
-const userProduct = require('./roots/user.products.roots')
+const userProduct = require('./roots/user.products.roots');
+const product = require("./roots/product.root");
 
 app.use('/api/users',user) //midle function
 
 app.use('/api/user-products', userProduct);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument.options));
+
+app.use('/api/product',product);
+
+app.use("/",express.static("files"));
 
 
 app.listen(port, () => {

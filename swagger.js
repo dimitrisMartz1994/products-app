@@ -65,6 +65,51 @@ exports.options = {
                         }
                     }
                 }
+            },
+            "post" : {
+                "tags": ["Users"],
+                "description" : "Create new user",
+                "requestBody" : {
+                    "description" : "user schema to insert",
+                    "content":{
+                        "applicatiom/json": {
+                            "schema" : {
+                                "type" : "object",
+                                "properties" : {
+                                    "username" : {"type" : "string"},
+                                    "password" : {"type" : "string"},
+                                    "name" : {"type" : "string"},
+                                    "surname" : {"type" : "string"},
+                                    "email" : {"type" : "string"},
+                                    "address" : {
+                                        "type" : "object",
+                                        "properties" : {
+                                            "area" : {"type" : "string"},
+                                            "road" : {"type" : "string"},
+                                        }
+                                    },
+                                    "phone" : {
+                                        "type" : "array",
+                                        "items" : {
+                                            "type" : "object",
+                                            "properties" : {
+                                                "type" : {"type" : "string"},
+                                                "number" : {"type" : "string"}
+                                            }
+                                        }
+                                    }
+                                },
+                                "required" : ["username", "password", "email"]
+                            }
+                           
+                        }
+                    }
+                },
+                "responses" : {
+                    "200" : {
+                        "description" : " new user inserted"
+                    }
+                }
             }
         },
         "/api/users/{username}" : {
@@ -88,7 +133,77 @@ exports.options = {
                         }
                     }
                 }
+            },
+            "patch" :{
+                "tags" : ["Users"],
+                "description" : "update user",
+                "parameters" : [
+                    {
+                        "name" : "username",
+                        "in" : "path",
+                        "required" : true,
+                        "description" : "username of user to update",
+                        "type" : "string"
+                    }
+                ],
+                "requestBody" :{
+                    "description" : "user to update" ,
+                    "content" : {
+                        "application/json" : {
+                            "type" : "object",
+                            "properties" : {
+                                "username" : {"type" : "string"},
+                                "name" : {"type" : "string"},
+                                "surname" : { "type" : "string"},
+                                "email" : {"type"  : "string"},
+                                "address" : {
+                                    "type" : "object",
+                                    "properties" : {
+                                        "area" : {"type"  : "string"},
+                                        "road" : {"type"  : "string"}
+                                    }
+                                },
+                                "phone" : {
+                                    "type" : "array" ,
+                                    "items" :{
+                                        "type" : "object",
+                                        "properties" : {
+                                            "type" : {"type"  : "string"},
+                                            "number" : {"type"  : "string"}
+                                        }
+                                    }
+                                }
+                            },
+                            "required" :["email"]
+                        }
+                    }
+                },
+                "responses" : {
+                    "200" : {
+                        "descrition" : "update user",
+                        "schema" : {
+                            "$ref" : "#/components/schemas/User"
+                        }
+                    }
+                }  
+            },
+            "delete" :{
+                "tags" :["Users"],
+                "description" : "delete a user",
+                "parameters" : [{
+                    "name" : "username",
+                    "in" : "path",
+                    "description" : "user to delete",
+                    "type" : "string"
+                }],
+                "responses" : {
+                    "200" : {
+                        "description" : "delete a user"
+                    }
+                }
             }
-        }
+            
+        },
+        "/api/user-products" :{}   
     }
 }

@@ -15,8 +15,14 @@ const swaggerDocument = require('./swagger');
 mongoose.connect(process.env.MONGODB_URI).then(
         () => {console.log('connection to mongodb is ok')},
         err => {console.log('fail to connect to mogodb',err)}
-         );
+);
 
+
+
+const cors = require("cors");
+app.use (cors)(({
+    origin : '*'
+}))       
 const user = require("./roots/user.root");
 const userProduct = require('./roots/user.products.roots');
 const product = require("./roots/product.root");

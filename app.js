@@ -2,9 +2,11 @@ const express = require('express');
 
 const app = express();
 
-const port =3000;
+// const port =3000;
 
 const mongoose = require('mongoose');
+
+require('dotenv').config();
 
 app.use(express.json()); //το εχω για οταν θελω να κανω post
 
@@ -19,11 +21,15 @@ mongoose.connect(process.env.MONGODB_URI).then(
 
 
 
-const cors = require("cors");
-app.use (cors)(({
-    origin : '*'
-}))       
+const cors = require('cors');
+
+// app.use (cors)(({
+//     origin : '*'
+    
+// }));       
+
 const user = require("./roots/user.root");
+
 const userProduct = require('./roots/user.products.roots');
 const product = require("./roots/product.root");
 
@@ -38,6 +44,8 @@ app.use('/api/product',product);
 app.use("/",express.static("files"));
 
 
-app.listen(port, () => {
-    console.log('server  is listening')
-});
+// app.listen(port, () => {
+//     console.log('server  is listening')
+// });
+
+module.exports = app;

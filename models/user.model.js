@@ -22,12 +22,12 @@ let productSchema = new Schema ({
 
 let userSchema = new mongoose.Schema ({
     username :{
-        type : String,
-        require : [true,'username is required field'],
+        type:String,
+        require:[true,'username is required field'],
         maxLength:20,
-        unique : true,
-        trim : true, 
-        lowercase : true, 
+        unique:true,
+        trim:true, 
+        lowercase:true, 
     },
     password : {
         type: String,

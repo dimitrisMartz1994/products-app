@@ -2,6 +2,8 @@ const {format , createLogger, transports} = require("winston");
 require('winston-daily-rotate-file');
 require('winston-mongodb');
 
+require('dotenv').config();
+
 const {combine, timestamp,label,prettyPrint} = format
 
 const fileRotateTransport = new transports.DailyRotateFile({
